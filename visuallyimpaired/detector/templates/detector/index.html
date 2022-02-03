@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static "detector/style.css"%}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function readURL(input) {
+             
+         if (input.files && input.files[0]) {
+             var reader = new FileReader();
+             reader.onload = function (e) {
+                 $('#up')
+                     .attr('src', e.target.result)
+                     .width(550)
+                     .height(500);
+             };
+
+             reader.readAsDataURL(input.files[0]);
+         }
+     }
+
+    
+
+     $(document).ready(function (e) {
+
+
+    $("#fileuploader").change(function(){
+           readURL(this);
+       });
+
+    $('#uploadButton').on('click',(function(e) {
+        e.preventDefault();
+
+        var file1 = document.getElementById("fileuploader").files[0];
+        
+        var formData = new FormData();
+        formData.append('imagePath', file1);
+       
+        $.ajax({
+            type:'POST',
+            url: 'detect',
+            data:formData,
+            contentType: 'multipart/form-data',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                console.log("success");
+            },
+            error: function(data){
+                console.log("error");
+               
+            }
+        });
+    }));
+    
+});
+ </script>
+</head>
+<body>
+    <h1>Upload Image</h1>
+    <div class="flex-container">
+        <div>
+            <div>
+            <img id="up" style="width: 100%; " src="{% static "detector/images/default.png" %}" alt="Uploaded Image">
+            </div>
+            <div>
+            <input id="fileuploader" type="file" onchange="readURL(this);" >
+        </div>
+        </div>
+        <div style="vertical-align: middle; padding-top: 5%;" >
+            <button id="uploadButton" type="button">Process..</button>
+        </div>
+    </div>
+</body>
+</html>
