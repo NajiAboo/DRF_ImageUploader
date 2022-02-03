@@ -13,4 +13,4 @@ Upload image using JQuery Ajax and Django Rest Framework
    ## Python3 manage.py runserver
  
 
- [![Watch the video](Currency.png)](https://youtu.be/tYqGyag4mT8)
+ [![Watch the video](uploader.png)](https://youtu.be/tYqGyag4mT8)
