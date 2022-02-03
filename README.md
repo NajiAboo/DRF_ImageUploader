@@ -2,7 +2,7 @@
 Upload image using JQuery Ajax and Django Rest Framework
 
 # create conda environment 
-  # conda create --name env
+  ## conda create --name env
 # Install Django 
   # conda install -c anaconda django
 # Install Django Rest Framework
